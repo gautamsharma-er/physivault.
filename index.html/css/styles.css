@@ -1,0 +1,1623 @@
+/* ==========================================================================
+   PhysiVault Modern Scientific Design System
+   Responsive, high-contrast, mathematical typography, light/dark themes
+   ========================================================================== */
+
+:root {
+  /* Color Palette - Dark Theme (Default) */
+  --bg-primary: #090d16;
+  --bg-surface: #0f172a;
+  --bg-surface-elevated: #1e293b;
+  --bg-card: rgba(30, 41, 59, 0.7);
+  --bg-card-hover: rgba(51, 65, 85, 0.7);
+  --bg-canvas: #060913;
+  --bg-input: #0f172a;
+
+  --border-color: rgba(148, 163, 184, 0.15);
+  --border-color-focus: #38bdf8;
+  --border-color-hover: rgba(148, 163, 184, 0.35);
+
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-link: #38bdf8;
+
+  --accent-cyan: #38bdf8;
+  --accent-blue: #3b82f6;
+  --accent-violet: #8b5cf6;
+  --accent-emerald: #10b981;
+  --accent-amber: #f59e0b;
+  --accent-rose: #f43f5e;
+
+  --badge-bg: rgba(56, 189, 248, 0.12);
+  --badge-text: #38bdf8;
+  --badge-border: rgba(56, 189, 248, 0.3);
+
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 20px rgba(56, 189, 248, 0.15);
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', Menlo, Consolas, monospace;
+  --font-math: 'STIX Two Math', 'Cambria Math', 'Times New Roman', serif;
+
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+}
+
+/* Light Theme Variables */
+[data-theme="light"] {
+  --bg-primary: #f8fafc;
+  --bg-surface: #ffffff;
+  --bg-surface-elevated: #f1f5f9;
+  --bg-card: rgba(255, 255, 255, 0.9);
+  --bg-card-hover: #ffffff;
+  --bg-canvas: #e2e8f0;
+  --bg-input: #f8fafc;
+
+  --border-color: rgba(100, 116, 139, 0.2);
+  --border-color-focus: #0284c7;
+  --border-color-hover: rgba(100, 116, 139, 0.4);
+
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --text-link: #0284c7;
+
+  --accent-cyan: #0284c7;
+  --accent-blue: #2563eb;
+  --accent-violet: #7c3aed;
+  --accent-emerald: #059669;
+  --accent-amber: #d97706;
+  --accent-rose: #e11d48;
+
+  --badge-bg: rgba(2, 132, 199, 0.08);
+  --badge-text: #0369a1;
+  --badge-border: rgba(2, 132, 199, 0.25);
+
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  --shadow-glow: 0 0 20px rgba(2, 132, 199, 0.12);
+}
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--text-link);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* Header & Navigation */
+.pv-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: rgba(9, 13, 22, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color var(--transition-normal);
+}
+
+[data-theme="light"] .pv-header {
+  background-color: rgba(255, 255, 255, 0.88);
+}
+
+.pv-nav-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pv-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+}
+
+.pv-logo:hover {
+  text-decoration: none;
+}
+
+.pv-logo-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
+  border-radius: var(--radius-md);
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+}
+
+.pv-logo-badge {
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 0.15rem 0.4rem;
+  background-color: var(--badge-bg);
+  color: var(--badge-text);
+  border: 1px solid var(--badge-border);
+  border-radius: var(--radius-sm);
+  margin-left: 0.35rem;
+  vertical-align: middle;
+  text-transform: uppercase;
+}
+
+.pv-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  list-style: none;
+}
+
+.pv-nav-link {
+  font-size: 0.925rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.pv-nav-link:hover,
+.pv-nav-link.active {
+  color: var(--text-primary);
+  background-color: var(--bg-surface-elevated);
+  text-decoration: none;
+}
+
+.pv-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.pv-theme-toggle {
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.pv-theme-toggle:hover {
+  color: var(--text-primary);
+  border-color: var(--accent-cyan);
+}
+
+.pv-mobile-menu-btn {
+  display: none;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+}
+
+/* Main Content Container */
+.pv-main {
+  flex: 1;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+/* Views Management */
+.pv-view {
+  display: none;
+  animation: fadeIn 0.25s ease-out;
+}
+
+.pv-view.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Hero Section */
+.pv-hero {
+  text-align: center;
+  padding: 3.5rem 1rem 2.5rem;
+  position: relative;
+}
+
+.pv-hero-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent-cyan);
+  background-color: var(--badge-bg);
+  border: 1px solid var(--badge-border);
+  padding: 0.3rem 0.85rem;
+  border-radius: var(--radius-full);
+  margin-bottom: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.pv-hero-title {
+  font-size: clamp(2.2rem, 5vw, 3.75rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #ffffff 40%, var(--accent-cyan) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+[data-theme="light"] .pv-hero-title {
+  background: linear-gradient(135deg, #0f172a 40%, #0284c7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.pv-hero-subtitle {
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  color: var(--text-secondary);
+  max-width: 680px;
+  margin: 0 auto 2.25rem;
+  line-height: 1.5;
+}
+
+/* Large Hero Search Bar */
+.pv-hero-search-wrap {
+  max-width: 680px;
+  margin: 0 auto 2.5rem;
+  position: relative;
+}
+
+.pv-search-input-box {
+  display: flex;
+  align-items: center;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 0.5rem 0.75rem 0.5rem 1.25rem;
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
+  transition: all var(--transition-fast);
+}
+
+.pv-search-input-box:focus-within {
+  border-color: var(--border-color-focus);
+  box-shadow: var(--shadow-lg), 0 0 0 2px rgba(56, 189, 248, 0.2);
+}
+
+.pv-search-icon {
+  color: var(--text-muted);
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+}
+
+.pv-hero-search-input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  outline: none;
+}
+
+.pv-search-submit-btn {
+  background: var(--accent-cyan);
+  color: #0f172a;
+  border: none;
+  padding: 0.6rem 1.25rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.pv-search-submit-btn:hover {
+  opacity: 0.9;
+}
+
+/* Autocomplete Dropdown */
+.pv-search-suggestions {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  z-index: 50;
+  max-height: 380px;
+  overflow-y: auto;
+  display: none;
+  text-align: left;
+}
+
+.pv-search-suggestions.show {
+  display: block;
+}
+
+.pv-suggestion-item {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background-color var(--transition-fast);
+}
+
+.pv-suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.pv-suggestion-item:hover,
+.pv-suggestion-item.selected {
+  background-color: var(--bg-surface-elevated);
+}
+
+.pv-sugg-name {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.pv-sugg-eq {
+  font-family: var(--font-math);
+  color: var(--accent-cyan);
+  font-size: 0.95rem;
+  margin-top: 0.2rem;
+}
+
+.pv-sugg-meta {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Quick Access Academic Level Cards */
+.pv-section-header {
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.pv-section-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.pv-section-sub {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.pv-level-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.pv-level-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.pv-level-card:hover {
+  border-color: var(--accent-cyan);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  text-decoration: none;
+  background: var(--bg-card-hover);
+}
+
+.pv-level-badge {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.2rem 0.5rem;
+  background-color: var(--badge-bg);
+  color: var(--badge-text);
+  border-radius: var(--radius-sm);
+  margin-bottom: 0.75rem;
+}
+
+.pv-level-name {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.35rem;
+}
+
+.pv-level-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  margin-bottom: 1rem;
+}
+
+.pv-level-footer {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent-cyan);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+/* Category Grid */
+.pv-category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.pv-cat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.pv-cat-card:hover {
+  border-color: var(--accent-violet);
+  background: var(--bg-card-hover);
+  transform: translateY(-2px);
+}
+
+.pv-cat-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.pv-cat-icon-badge {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-surface-elevated);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-cyan);
+}
+
+.pv-cat-count {
+  font-size: 0.75rem;
+  font-weight: 600;
+  background-color: var(--bg-surface-elevated);
+  color: var(--text-muted);
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-full);
+}
+
+.pv-cat-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.4rem;
+}
+
+.pv-cat-desc {
+  font-size: 0.825rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* Highlights Banner */
+.pv-highlights-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.pv-highlight-num {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--accent-cyan);
+  line-height: 1;
+  margin-bottom: 0.35rem;
+}
+
+.pv-highlight-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   Formula Library
+   ========================================================================== */
+.pv-library-toolbar {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.pv-filter-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.pv-select {
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 0.5rem 0.85rem;
+  border-radius: var(--radius-sm);
+  outline: none;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: border-color var(--transition-fast);
+}
+
+.pv-select:focus {
+  border-color: var(--border-color-focus);
+}
+
+.pv-filter-search {
+  flex: 1;
+  min-width: 220px;
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 0.5rem 0.85rem;
+  border-radius: var(--radius-sm);
+  outline: none;
+  font-size: 0.875rem;
+}
+
+.pv-filter-search:focus {
+  border-color: var(--border-color-focus);
+}
+
+.pv-active-filters-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border-color);
+  font-size: 0.85rem;
+}
+
+.pv-filter-count {
+  color: var(--text-secondary);
+}
+
+.pv-clear-filters-btn {
+  background: none;
+  border: none;
+  color: var(--accent-cyan);
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-sm);
+}
+
+.pv-clear-filters-btn:hover {
+  text-decoration: underline;
+}
+
+/* Formula Card Grid */
+.pv-formulas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1.25rem;
+}
+
+.pv-formula-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+}
+
+.pv-formula-card:hover {
+  border-color: var(--accent-cyan);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.pv-card-top-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.pv-level-pill {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  background-color: var(--badge-bg);
+  color: var(--badge-text);
+  border-radius: var(--radius-sm);
+}
+
+.pv-diff-pill {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-sm);
+}
+
+.pv-diff-Beginner { background: rgba(16, 185, 129, 0.12); color: #10b981; }
+.pv-diff-Intermediate { background: rgba(245, 158, 11, 0.12); color: #f59e0b; }
+.pv-diff-Advanced { background: rgba(59, 130, 246, 0.12); color: #3b82f6; }
+.pv-diff-Expert { background: rgba(168, 85, 247, 0.12); color: #a855f7; }
+
+.pv-formula-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+.pv-equation-display {
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.85rem;
+  font-family: var(--font-math);
+  font-size: 1.15rem;
+  color: var(--text-primary);
+  text-align: center;
+  overflow-x: auto;
+}
+
+.pv-formula-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+  margin-bottom: 0.85rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.pv-var-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 0.85rem;
+}
+
+.pv-var-chip {
+  font-size: 0.725rem;
+  background: var(--bg-surface-elevated);
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+}
+
+.pv-unit-row {
+  font-size: 0.775rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.pv-card-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.pv-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+  border: 1px solid transparent;
+}
+
+.pv-btn-primary {
+  background-color: var(--accent-cyan);
+  color: #0f172a;
+}
+
+.pv-btn-primary:hover {
+  opacity: 0.9;
+  text-decoration: none;
+}
+
+.pv-btn-secondary {
+  background-color: var(--bg-surface-elevated);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+.pv-btn-secondary:hover {
+  border-color: var(--accent-cyan);
+  text-decoration: none;
+}
+
+.pv-btn-sub {
+  background-color: var(--bg-surface-elevated);
+  color: var(--text-secondary);
+  border-color: var(--border-color);
+  padding: 0.35rem 0.65rem;
+  font-size: 0.8rem;
+}
+
+.pv-btn-sub.active,
+.pv-btn-sub:hover {
+  color: var(--accent-cyan);
+  border-color: var(--accent-cyan);
+}
+
+/* Empty State */
+.pv-empty-state {
+  text-align: center;
+  padding: 4rem 1rem;
+  grid-column: 1 / -1;
+  background: var(--bg-card);
+  border: 1px dashed var(--border-color);
+  border-radius: var(--radius-lg);
+}
+
+.pv-empty-icon {
+  font-size: 2.5rem;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+/* ==========================================================================
+   Formula Detail Modal (Complete 10-point breakdown)
+   ========================================================================== */
+.pv-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 200;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.pv-modal-backdrop.open {
+  display: flex;
+}
+
+.pv-modal-content {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  max-width: 820px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  animation: modalScale 0.2s ease-out;
+}
+
+@keyframes modalScale {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.pv-modal-header {
+  position: sticky;
+  top: 0;
+  background-color: var(--bg-surface);
+  border-bottom: 1px solid var(--border-color);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10;
+}
+
+.pv-modal-close-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.5rem;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.pv-modal-close-btn:hover {
+  color: var(--text-primary);
+  background-color: var(--bg-surface-elevated);
+}
+
+.pv-modal-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.pv-detail-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.pv-detail-heading {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.pv-detail-equation-hero {
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  text-align: center;
+  font-family: var(--font-math);
+  font-size: 1.6rem;
+  color: var(--text-primary);
+  overflow-x: auto;
+}
+
+.pv-vars-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.pv-vars-table th, .pv-vars-table td {
+  padding: 0.6rem 0.85rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.pv-vars-table th {
+  color: var(--text-muted);
+  font-weight: 600;
+  background-color: var(--bg-surface-elevated);
+}
+
+.pv-vars-table tr:last-child td {
+  border-bottom: none;
+}
+
+.pv-derivation-box {
+  background: var(--bg-surface-elevated);
+  border-left: 3px solid var(--accent-cyan);
+  padding: 1rem;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.pv-special-cases-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 0.75rem;
+}
+
+.pv-special-case-card {
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 0.85rem;
+}
+
+.pv-special-case-card h5 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent-amber);
+  margin-bottom: 0.35rem;
+}
+
+.pv-special-case-card .pv-case-eq {
+  font-family: var(--font-math);
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  margin-bottom: 0.35rem;
+}
+
+.pv-applications-list {
+  list-style: disc inside;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.pv-related-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.pv-related-link-chip {
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-color);
+  color: var(--accent-cyan);
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.pv-related-link-chip:hover {
+  border-color: var(--accent-cyan);
+  background: var(--badge-bg);
+}
+
+/* ==========================================================================
+   Simulation Canvas & Controls
+   ========================================================================== */
+.pv-sim-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 1.5rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 900px) {
+  .pv-sim-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pv-sim-canvas-wrap {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-canvas);
+  min-height: 360px;
+}
+
+.pv-sim-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.pv-sim-overlay-stats {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(4px);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.775rem;
+  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  z-index: 5;
+}
+
+.pv-sim-overlay-stats strong {
+  color: var(--accent-cyan);
+  font-family: var(--font-mono);
+}
+
+.pv-sim-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.pv-sim-control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.pv-sim-control-group label {
+  font-size: 0.825rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  display: flex;
+  justify-content: space-between;
+}
+
+.pv-sim-control-group input[type="range"] {
+  accent-color: var(--accent-cyan);
+  cursor: pointer;
+}
+
+.pv-sim-btn-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.pv-sim-hint {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin-top: 0.5rem;
+}
+
+.pv-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.825rem;
+  cursor: pointer;
+}
+
+.pv-btn-group {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+/* ==========================================================================
+   Calculators Suite
+   ========================================================================== */
+.pv-calculators-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 1.5rem;
+}
+
+.pv-calculator-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.pv-calc-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.pv-calc-badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  background-color: var(--badge-bg);
+  color: var(--badge-text);
+  border-radius: var(--radius-sm);
+  display: inline-block;
+  margin-bottom: 0.35rem;
+}
+
+.pv-calc-formula-tag {
+  font-family: var(--font-math);
+  font-size: 0.95rem;
+  color: var(--accent-cyan);
+  background: var(--bg-surface-elevated);
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+}
+
+.pv-calc-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.pv-calc-inputs-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.pv-calc-input-group label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 0.25rem;
+}
+
+.pv-input-with-unit {
+  display: flex;
+  align-items: center;
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.pv-input-with-unit:focus-within {
+  border-color: var(--border-color-focus);
+}
+
+.pv-input-with-unit input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  padding: 0.45rem 0.75rem;
+  outline: none;
+}
+
+.pv-unit-tag {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  padding: 0.45rem 0.75rem;
+  background-color: var(--bg-surface-elevated);
+  border-left: 1px solid var(--border-color);
+  white-space: nowrap;
+}
+
+.pv-calc-result-box {
+  background-color: var(--bg-surface-elevated);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+}
+
+.pv-calc-res-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+}
+
+.pv-calc-res-val {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  font-family: var(--font-mono);
+  margin-bottom: 0.2rem;
+}
+
+.pv-calc-res-sub {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.pv-calc-steps {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-color);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.pv-calc-steps ul {
+  list-style: disc inside;
+  margin-top: 0.35rem;
+}
+
+/* ==========================================================================
+   Schrödinger Wavefunction Studio
+   ========================================================================== */
+.pv-schrodinger-hero {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.pv-schrodinger-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent-violet);
+  background: rgba(139, 92, 246, 0.12);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+.pv-equations-display-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 800px) {
+  .pv-equations-display-card {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pv-eq-col {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.pv-eq-tag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.pv-large-math {
+  font-family: var(--font-math);
+  font-size: 1.4rem;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+  overflow-x: auto;
+}
+
+.pv-eq-sub {
+  font-size: 0.825rem;
+  color: var(--text-secondary);
+}
+
+.pv-symbols-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.pv-symbol-item {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+}
+
+.pv-sym-badge {
+  font-family: var(--font-math);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  background: var(--bg-surface-elevated);
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-sm);
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+.pv-symbol-item strong {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  margin-bottom: 0.35rem;
+}
+
+.pv-symbol-item p {
+  font-size: 0.825rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+.pv-normalization-box {
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  margin-top: 0.5rem;
+}
+
+.pv-norm-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+}
+
+.pv-norm-eq {
+  font-family: var(--font-math);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--accent-emerald);
+  margin-bottom: 0.35rem;
+}
+
+.pv-normalization-box p {
+  font-size: 0.775rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* ==========================================================================
+   Math Formatting Elements (KaTeX / MathML styling)
+   ========================================================================== */
+.pv-rendered-math {
+  font-family: var(--font-math);
+  letter-spacing: 0.02em;
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.15rem;
+}
+
+.pv-frac {
+  display: inline-flex;
+  flex-direction: column;
+  vertical-align: middle;
+  text-align: center;
+  padding: 0 0.2rem;
+  font-size: 0.9em;
+}
+
+.pv-num {
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 1px;
+}
+
+.pv-den {
+  padding-top: 1px;
+}
+
+.pv-sqrt {
+  display: inline-flex;
+  align-items: center;
+}
+
+.pv-radical {
+  font-size: 1.1em;
+  margin-right: 1px;
+}
+
+.pv-radicand {
+  border-top: 1px solid currentColor;
+  padding-top: 1px;
+}
+
+.pv-vector {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+}
+
+.pv-arrow {
+  position: absolute;
+  top: -0.4em;
+  left: 0;
+  right: 0;
+  font-size: 0.7em;
+  text-align: center;
+}
+
+.pv-unit-vec {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+}
+
+.pv-caret {
+  position: absolute;
+  top: -0.4em;
+  left: 0;
+  right: 0;
+  font-size: 0.7em;
+  text-align: center;
+}
+
+.pv-math-sym {
+  font-style: normal;
+  padding: 0 0.1em;
+}
+
+.pv-bracket, .pv-paren, .pv-brace {
+  font-size: 1.15em;
+  color: var(--text-secondary);
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.pv-footer {
+  background-color: var(--bg-surface);
+  border-top: 1px solid var(--border-color);
+  padding: 2.5rem 1.5rem 1.5rem;
+  margin-top: auto;
+}
+
+.pv-footer-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.pv-footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.pv-footer-copy {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.pv-footer-links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.pv-footer-links a {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.pv-footer-links a:hover {
+  color: var(--text-primary);
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 768px) {
+  .pv-nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--bg-surface);
+    border-bottom: 1px solid var(--border-color);
+    flex-direction: column;
+    padding: 1rem;
+    gap: 0.5rem;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .pv-nav-links.mobile-open {
+    display: flex;
+  }
+
+  .pv-mobile-menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .pv-hero {
+    padding: 2rem 0.5rem 1.5rem;
+  }
+
+  .pv-formulas-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pv-calculators-grid {
+    grid-template-columns: 1fr;
+  }
+}
